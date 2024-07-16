@@ -25,6 +25,7 @@ app.post("/register", (req, res) => {
     }
     addUser(email, password);
     res.status(201).send("User registered");
+    console.log("🆕👤 Registered new user: " + email);
 });
 
 // Endpoint di login
@@ -38,12 +39,11 @@ app.post("/login", (req, res) => {
         return res.status(401).send("Incorrect password");
     }
     res.status(200).send("Login successful");
+    console.log("🟢 A user connected");
 });
 
 // Quando un client si connette
 io.on("connection", (socket) => {
-    console.log("A user connected");
-
     // Invia i sensori al client
     socket.emit("sensors", sensors);
 
@@ -51,12 +51,14 @@ io.on("connection", (socket) => {
     socket.on("addSensor", (sensor) => {
         addSensor(sensor);
         io.emit("sensors", sensors);
+        console.log("🆕 Added new sensor");
     });
 
     // Rimuovi un sensore
     socket.on("removeSensor", (sensorId) => {
         removeSensor(sensorId);
         io.emit("sensors", sensors);
+        console.log("❌ Removed sensor");
     });
 
     // Simulazione degli aggiornamenti dei sensori
@@ -69,11 +71,11 @@ io.on("connection", (socket) => {
     }, 5000);
 
     socket.on("disconnect", () => {
-        console.log("A user disconnected");
+        console.log("🔴 A user disconnected");
     });
 });
 
 const PORT = 3000;
 server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`🌐 Server is running on port ${PORT}...`);
 });
