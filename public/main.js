@@ -23,15 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const username = document.getElementById("register-username").value;
             try {
                 await axios.post("/register", { username });
-                alert("Registration successful");
+                alert("Registrazione avvenuta con successo");
             } catch (error) {
                 alert(error.response.data);
             }
         });
     }
 
+    let socket;
+
     if (sensorForm) {
-        const socket = io();
+        socket = io();
 
         sensorForm.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -59,9 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createRemoveButton(sensorId) {
         const button = document.createElement("button");
-        button.textContent = "Remove";
+        button.textContent = "Rimuovi";
         button.addEventListener("click", () => {
-            socket.emit("removeSensor", sensorId);
+            if (socket) {
+                socket.emit("removeSensor", sensorId);
+            } else {
+                console.error("Socket non è definito");
+            }
         });
         return button;
     }
