@@ -30,6 +30,8 @@ h1 {
     margin-bottom: 20px;
 }
 
+input[type="email"],
+input[type="password"],
 input[type="text"],
 input[type="number"] {
     width: calc(100% - 20px);

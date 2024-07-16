@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const registerForm = document.getElementById("register-form");
     const loginContainer = document.getElementById("login-container");
     const registerContainer = document.getElementById("register-container");
-    const autenticationContainer = document.getElementById(
-        "autentication-container"
+    const authenticationContainer = document.getElementById(
+        "authentication-container"
     );
     const dashboardContainer = document.getElementById("dashboard-container");
     const sensorForm = document.getElementById("sensor-form");
@@ -31,11 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loginForm) {
         loginForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
             try {
-                await axios.post("/login", { username });
-                // fixare le 2 righe sotto
-                autenticationContainer.style.display = "none";
+                await axios.post("/login", { email, password });
+                authenticationContainer.style.display = "none";
                 dashboardContainer.style.display = "block";
             } catch (error) {
                 alert(error.response.data);
@@ -46,10 +46,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (registerForm) {
         registerForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            const username = document.getElementById("register-username").value;
+            const email = document.getElementById("register-email").value;
+            const password = document.getElementById("register-password").value;
             try {
-                await axios.post("/register", { username });
+                await axios.post("/register", { email, password });
                 alert("Registration successful");
+                // Dopo la registrazione, passa automaticamente al login
+                registerContainer.style.display = "none";
+                loginContainer.style.display = "block";
             } catch (error) {
                 alert(error.response.data);
             }

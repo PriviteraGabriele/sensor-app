@@ -29,15 +29,20 @@ const saveUsers = () => {
     fs.writeFileSync(filePath, JSON.stringify(users, null, 2), "utf8");
 };
 
-const addUser = (username) => {
-    if (!users.includes(username)) {
-        users.push(username);
-        saveUsers();
+const addUser = (email, password) => {
+    // Controlla se l'utente esiste già per email
+    if (findUserByEmail(email)) {
+        return false; // Utente già presente
     }
+
+    // Aggiungi nuovo utente
+    users.push({ email, password });
+    saveUsers();
+    return true; // Utente aggiunto con successo
 };
 
-const findUser = (username) => {
-    return users.includes(username);
+const findUserByEmail = (email) => {
+    return users.find((user) => user.email === email);
 };
 
-module.exports = { users, addUser, findUser };
+module.exports = { users, addUser, findUserByEmail };
