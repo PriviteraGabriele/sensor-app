@@ -1,8 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("login-form");
     const registerForm = document.getElementById("register-form");
+    const loginContainer = document.getElementById("login-container");
+    const registerContainer = document.getElementById("register-container");
+    const autenticationContainer = document.getElementById(
+        "autentication-container"
+    );
+    const dashboardContainer = document.getElementById("dashboard-container");
     const sensorForm = document.getElementById("sensor-form");
     const sensorsList = document.getElementById("sensors");
+    const showRegisterBtn = document.getElementById("show-register-form-btn");
+    const showLoginBtn = document.getElementById("show-login-form-btn");
+
+    // Mostra il form di registrazione e nasconde il form di login
+    if (showRegisterBtn) {
+        showRegisterBtn.addEventListener("click", () => {
+            loginContainer.style.display = "none";
+            registerContainer.style.display = "block";
+        });
+    }
+
+    // Mostra il form di login e nasconde il form di registrazione
+    if (showLoginBtn) {
+        showLoginBtn.addEventListener("click", () => {
+            registerContainer.style.display = "none";
+            loginContainer.style.display = "block";
+        });
+    }
 
     if (loginForm) {
         loginForm.addEventListener("submit", async (e) => {
@@ -10,7 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const username = document.getElementById("username").value;
             try {
                 await axios.post("/login", { username });
-                window.location.href = "/dashboard.html";
+                // fixare le 2 righe sotto
+                autenticationContainer.style.display = "none";
+                dashboardContainer.style.display = "block";
             } catch (error) {
                 alert(error.response.data);
             }
@@ -23,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const username = document.getElementById("register-username").value;
             try {
                 await axios.post("/register", { username });
-                alert("Registrazione avvenuta con successo");
+                alert("Registration successful");
             } catch (error) {
                 alert(error.response.data);
             }

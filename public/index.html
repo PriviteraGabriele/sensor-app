@@ -3,25 +3,68 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Login</title>
+        <link rel="stylesheet" href="./css/style.css" />
     </head>
     <body>
-        <h1>Login</h1>
-        <form id="login-form">
-            <input type="text" id="username" placeholder="Username" required />
-            <button type="submit">Login</button>
-        </form>
-        <h1>Register</h1>
-        <form id="register-form">
-            <input
-                type="text"
-                id="register-username"
-                placeholder="Username"
-                required
-            />
-            <button type="submit">Register</button>
-        </form>
+        <div id="autentication-container">
+            <div id="login-container">
+                <h1>Login</h1>
+                <form id="login-form">
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Username"
+                        required
+                    />
+                    <button type="submit">Login</button>
+                </form>
+                <br />
+                <button id="show-register-form-btn">Register</button>
+            </div>
+            <div id="register-container" style="display: none">
+                <h1>Register</h1>
+                <form id="register-form">
+                    <input
+                        type="text"
+                        id="register-username"
+                        placeholder="Username"
+                        required
+                    />
+                    <button type="submit">Register</button>
+                </form>
+                <br />
+                <button id="show-login-form-btn">Login</button>
+            </div>
+        </div>
+        <div id="dashboard-container" style="display: none">
+            <div id="dashboard-form">
+                <h1>Dashboard</h1>
+                <form id="sensor-form">
+                    <input
+                        type="text"
+                        id="sensor-name"
+                        placeholder="Sensor Name"
+                        required
+                    />
+                    <input
+                        type="text"
+                        id="sensor-type"
+                        placeholder="Sensor Type"
+                        required
+                    />
+                    <input
+                        type="number"
+                        id="sensor-interval"
+                        placeholder="Update Interval (ms)"
+                        required
+                    />
+                    <button type="submit">Add Sensor</button>
+                </form>
+            </div>
+            <ul id="sensors"></ul>
+        </div>
+        <script src="/socket.io/socket.io.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="/main.js"></script>
+        <script src="./js/main.js"></script>
     </body>
 </html>
