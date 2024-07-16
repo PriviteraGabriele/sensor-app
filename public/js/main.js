@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createRemoveButton(sensorId) {
         const button = document.createElement("button");
+        button.id = "removeButton";
         button.textContent = "Rimuovi";
         button.addEventListener("click", () => {
             if (socket) {
