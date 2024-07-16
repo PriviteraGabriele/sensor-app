@@ -79,7 +79,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const li = document.createElement("li");
                 li.textContent = `${sensor.name} (${sensor.type}): ${sensor.value}`;
                 li.dataset.id = sensor.id;
-                li.appendChild(createRemoveButton(sensor.id));
+
+                // Aggiungi il pulsante "Rimuovi" all'elemento <li>
+                const removeButton = createRemoveButton(sensor.id);
+                li.appendChild(removeButton);
+
                 sensorsList.appendChild(li);
             });
         });
