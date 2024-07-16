@@ -13,5 +13,5 @@ out/
 # Socket.io generated files
 socket.io.js
 
-# Lista degli utenti registrati
+# Registered Users List
 users.json
